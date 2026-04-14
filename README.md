@@ -1,4 +1,4 @@
-# Anthropic Continuum
+# Continuum
 
 An AI-powered adaptive tutoring platform that helps students remediate learning gaps through personalized, pedagogically-structured sessions. Teachers upload exam results; Claude analyzes errors and generates leveling plans; students work through adaptive chat sessions while face detection monitors engagement in real time.
 
@@ -24,7 +24,7 @@ An AI-powered adaptive tutoring platform that helps students remediate learning 
 ## Repository Layout
 
 ```
-anthropic-continuum/
+root/
 ├── backend/core-api/          # FastAPI REST API (Python 3.13)
 │   ├── apis/v1/               # Route handlers, request/response schemas, mappers
 │   ├── application/           # Use cases + DTOs

@@ -22,7 +22,8 @@
       "Bash(python -c \"from apis.v1.routes import *; print\\('✓ Routes imported successfully'\\)\")",
       "Bash(python -c ':*)",
       "Bash(./node_modules/.bin/tsc:*)",
-      "Bash(echo \"exit: $?\")"
+      "Bash(echo \"exit: $?\")",
+      "Bash(git push:*)"
     ]
   }
 }
