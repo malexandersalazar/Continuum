@@ -59,3 +59,75 @@ class LevelingPlanDTO:
     created_at: str
     approved_at: str | None
     updated_at: str
+
+
+# --- Session-related DTOs ---
+
+
+@dataclass
+class FaceSignalDTO:
+    state: str
+    confidence: float
+    timestamp: str
+    metrics: dict | None = None
+
+
+@dataclass
+class PedagogicalStateDTO:
+    state: str
+    confidence: float
+    sources: list[str] = field(default_factory=list)
+    recommended_event: int | None = None
+
+
+@dataclass
+class ChatMessageDTO:
+    id: str
+    role: str
+    text: str
+    timestamp: str
+    gagne_event: int | None = None
+
+
+@dataclass
+class SessionStateDTO:
+    session_id: str
+    plan_id: str
+    student_id: str
+    tenant_id: str
+    topic_actual: TopicPlanEntryDTO
+    gagne_event_actual: int
+    interaction_summary: str
+    turns_in_current_event: int
+    student_responses: list[str]
+    score_current_topic: float
+    intentos_evento_actual: int
+    transcript: list[ChatMessageDTO]
+    status: str
+    last_face_signal: FaceSignalDTO | None = None
+    last_pedagogical_state: PedagogicalStateDTO | None = None
+
+
+@dataclass
+class SessionInitInputDTO:
+    plan_id: str
+    student_id: str
+
+
+@dataclass
+class FreeSessionInitInputDTO:
+    topic_id: str
+    student_id: str
+
+
+@dataclass
+class TurnInputDTO:
+    session_id: str
+    student_message: str
+    face_signal: FaceSignalDTO | None = None
+
+
+@dataclass
+class TurnResultDTO:
+    message: ChatMessageDTO
+    session: SessionStateDTO

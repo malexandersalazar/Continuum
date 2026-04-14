@@ -15,6 +15,7 @@ services:
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
     volumes:
       - ./backend/core-api/logs:/app/logs
+      - ./backend/core-api/data:/app/data
     networks:
       - continuum
     restart: unless-stopped

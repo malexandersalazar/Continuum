@@ -27,7 +27,6 @@ function ReviewInner() {
   async function handleApprove() {
     if (!plan) return;
     setSaving(true);
-    await planningService.savePlan(plan);
     await planningService.setEstado(plan.plan_id, "approved");
     setSaving(false);
     router.push("/planning");

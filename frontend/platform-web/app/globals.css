@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "highlight.js/styles/github.css";
 
 :root {
   --background: #ffffff;
@@ -23,4 +24,55 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tutor bubble markdown prose */
+.tutor-md p { margin-bottom: 0.5em; }
+.tutor-md p:last-child { margin-bottom: 0; }
+.tutor-md ul { list-style: disc; padding-left: 1.25em; margin-bottom: 0.5em; }
+.tutor-md ol { list-style: decimal; padding-left: 1.25em; margin-bottom: 0.5em; }
+.tutor-md li { margin-bottom: 0.2em; }
+.tutor-md h1, .tutor-md h2, .tutor-md h3,
+.tutor-md h4, .tutor-md h5, .tutor-md h6 {
+  font-weight: 600;
+  margin-top: 0.75em;
+  margin-bottom: 0.25em;
+  line-height: 1.3;
+}
+.tutor-md h1 { font-size: 1.1em; }
+.tutor-md h2 { font-size: 1.05em; }
+.tutor-md h3 { font-size: 1em; }
+.tutor-md code:not(pre code) {
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: 0.25em;
+  padding: 0.1em 0.35em;
+  font-size: 0.875em;
+  font-family: var(--font-mono, monospace);
+}
+.tutor-md pre {
+  border-radius: 0.5em;
+  overflow-x: auto;
+  margin-bottom: 0.5em;
+  font-size: 0.8em;
+}
+.tutor-md pre code { font-family: var(--font-mono, monospace); }
+.tutor-md blockquote {
+  border-left: 3px solid #d1d5db;
+  padding-left: 0.75em;
+  color: #6b7280;
+  margin-bottom: 0.5em;
+}
+.tutor-md table { border-collapse: collapse; margin-bottom: 0.5em; font-size: 0.875em; }
+.tutor-md th, .tutor-md td { border: 1px solid #d1d5db; padding: 0.3em 0.6em; }
+.tutor-md th { background: rgba(0,0,0,0.05); font-weight: 600; }
+.tutor-md a { color: #2563eb; text-decoration: underline; }
+
+@media (prefers-color-scheme: dark) {
+  .tutor-md code:not(pre code) { background: rgba(255,255,255,0.1); }
+  .tutor-md blockquote { border-left-color: #4b5563; color: #9ca3af; }
+  .tutor-md th, .tutor-md td { border-color: #4b5563; }
+  .tutor-md th { background: rgba(255,255,255,0.05); }
+  .tutor-md a { color: #60a5fa; }
+  /* Invert highlight.js light theme tokens for dark bubbles */
+  .tutor-md .hljs { background: #161b22; color: #e6edf3; }
 }
