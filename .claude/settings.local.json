@@ -12,7 +12,8 @@
       "Bash(pnpm add:*)",
       "Bash(pnpm exec:*)",
       "Bash(git checkout:*)",
-      "Bash(git merge feat/ear-cv --no-ff -m ':*)"
+      "Bash(git merge:*)",
+      "Bash(git stash:*)"
     ]
   }
 }
