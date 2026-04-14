@@ -10,7 +10,9 @@
       "Bash(git -C C:/Projects/anthropic-continuum/backend/core-api branch --show-current)",
       "Bash(git -C C:/Projects/anthropic-continuum/frontend/platform-web branch --show-current)",
       "Bash(pnpm add:*)",
-      "Bash(pnpm exec:*)"
+      "Bash(pnpm exec:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge feat/ear-cv --no-ff -m ':*)"
     ]
   }
 }
