@@ -59,10 +59,22 @@ export interface LevelingPlan {
 
 export type FaceState = "neutral" | "confused" | "frustrated" | "sleepy" | "engaged";
 
+/**
+ * Raw per-frame measurements bundled with a FaceSignal.
+ * Optional fields grow as more detectors are added.
+ */
+export interface FaceMetrics {
+  /** Average Eye Aspect Ratio (both eyes). Open-eye range: 0.25–0.35; closure: < 0.22. */
+  ear?: number;
+  // Future: headPitch?: number; headYaw?: number; headRoll?: number; blinkRate?: number;
+}
+
 export interface FaceSignal {
   state: FaceState;
   confidence: number;
   timestamp: string;
+  /** Optional raw metrics for downstream analysis and debugging. */
+  metrics?: FaceMetrics;
 }
 
 export type PedagogicalStateKind =
