@@ -5,7 +5,12 @@
       "Bash(rm 'C:\\\\Projects\\\\anthropic-continuum\\\\frontend\\\\platform-web\\\\shared\\\\hooks\\\\useLocalStorageState.ts')",
       "Bash(rmdir 'C:\\\\Projects\\\\anthropic-continuum\\\\frontend\\\\platform-web\\\\shared\\\\hooks')",
       "Bash(pnpm build:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git -C C:/Projects/anthropic-continuum/backend/core-api branch --show-current)",
+      "Bash(git -C C:/Projects/anthropic-continuum/frontend/platform-web branch --show-current)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm exec:*)"
     ]
   }
 }
