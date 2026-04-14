@@ -1,9 +1,21 @@
 "use client";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { Card } from "@/shared/ui/Card";
 import { Button } from "@/shared/ui/Button";
 import { Input } from "@/shared/ui/Input";
 import type { ExamUpload } from "@/shared/domain/types";
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve(result.split(",")[1]);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
 interface Props {
   studentId: string;
@@ -14,15 +26,26 @@ interface Props {
 }
 
 export function ExamUploader({ studentId, onStudentIdChange, exams, onAdd, onRemove }: Props) {
-  function handleFiles(e: ChangeEvent<HTMLInputElement>) {
+  const [reading, setReading] = useState(false);
+
+  async function handleFiles(e: ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files ?? []);
-    const uploads: ExamUpload[] = files.map((f) => ({
-      student_id: studentId,
-      file_name: f.name,
-      file_size: f.size,
-    }));
-    onAdd(uploads);
-    e.target.value = "";
+    if (files.length === 0) return;
+    setReading(true);
+    try {
+      const uploads: ExamUpload[] = await Promise.all(
+        files.map(async (f) => ({
+          student_id: studentId,
+          file_name: f.name,
+          file_size: f.size,
+          file_content_base64: await fileToBase64(f),
+        })),
+      );
+      onAdd(uploads);
+    } finally {
+      setReading(false);
+      e.target.value = "";
+    }
   }
 
   return (
@@ -44,8 +67,10 @@ export function ExamUploader({ studentId, onStudentIdChange, exams, onAdd, onRem
             multiple
             accept="application/pdf"
             onChange={handleFiles}
-            className="block w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-blue-600 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-white hover:file:bg-blue-700"
+            disabled={reading}
+            className="block w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-blue-600 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-white hover:file:bg-blue-700 disabled:opacity-50"
           />
+          {reading && <p className="text-xs text-gray-500">Leyendo archivos...</p>}
         </label>
         {exams.length > 0 && (
           <ul className="space-y-1 text-sm">

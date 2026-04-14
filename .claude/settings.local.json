@@ -13,7 +13,12 @@
       "Bash(pnpm exec:*)",
       "Bash(git checkout:*)",
       "Bash(git merge:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(ls -la /c/Projects/anthropic-continuum/frontend/platform-web/.env*)",
+      "Bash(awk '{print length, $0}')",
+      "Bash(uv add:*)",
+      "Bash(uv run:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

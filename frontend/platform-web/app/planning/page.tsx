@@ -10,7 +10,15 @@ export default function PlanningPage() {
 
   async function handleGenerate() {
     const plan = await draft.generate();
-    if (plan) router.push(`/planning/review?plan_id=${plan.plan_id}`);
+    if (!plan) return;
+    if (plan.topics.length === 0) {
+      draft.setError(
+        "El examen no presenta errores en ninguno de los temas seleccionados. " +
+        "Verifica que los temas coincidan con el contenido evaluado en el PDF.",
+      );
+      return;
+    }
+    router.push(`/planning/review?plan_id=${plan.plan_id}`);
   }
 
   return (
@@ -39,9 +47,9 @@ export default function PlanningPage() {
           <Button
             className="mt-4 w-full"
             onClick={handleGenerate}
-            disabled={draft.submitting || draft.selectedTopics.length === 0}
+            disabled={draft.submitting || draft.selectedTopics.length === 0 || draft.exams.length === 0}
           >
-            {draft.submitting ? "Generando..." : "Generar plan"}
+            {draft.submitting ? "Analizando con IA..." : "Generar plan"}
           </Button>
         </Card>
       </aside>

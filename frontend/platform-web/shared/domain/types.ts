@@ -122,4 +122,5 @@ export interface ExamUpload {
   student_id: string;
   file_name: string;
   file_size: number;
+  file_content_base64: string;
 }

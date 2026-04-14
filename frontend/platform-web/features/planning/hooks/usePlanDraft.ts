@@ -29,6 +29,10 @@ export function usePlanDraft() {
       setError("Selecciona al menos un tema.");
       return null;
     }
+    if (exams.length === 0) {
+      setError("Adjunta al menos un examen en PDF.");
+      return null;
+    }
     setSubmitting(true);
     setError(null);
     try {
@@ -56,6 +60,7 @@ export function usePlanDraft() {
     setStudentId,
     submitting,
     error,
+    setError,
     generate,
   };
 }

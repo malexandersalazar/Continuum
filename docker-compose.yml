@@ -12,6 +12,7 @@ services:
     environment:
       ENV: ${ENV}
       LOG_LEVEL: ${LOG_LEVEL}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
     volumes:
       - ./backend/core-api/logs:/app/logs
     networks:

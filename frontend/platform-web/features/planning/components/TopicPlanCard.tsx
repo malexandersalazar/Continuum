@@ -64,7 +64,7 @@ export function TopicPlanCard({ entry, onChange }: Props) {
             Notas de adaptación
           </span>
           <Textarea
-            rows={2}
+            rows={4}
             value={entry.notas_adaptacion}
             onChange={(e) => onChange({ ...entry, notas_adaptacion: e.target.value })}
           />

@@ -1,21 +1,21 @@
 import type { LevelingPlan, PlanEstado } from "@/shared/domain/types";
-import { DEMO_TENANT_ID } from "@/shared/domain/knowledgeBase";
-import { mockAnalyzeAndPlan } from "@/shared/domain/mockPlanner";
+import { apiClient } from "@/shared/lib/apiClient";
 import { listKeys, readJSON, writeJSON, removeKey } from "@/shared/lib/storage";
 import type { PlanDraftInput } from "../types";
 
-// Storage key convention: the planning service and the learning service both
-// read from `plan:{plan_id}` so the student inbox picks up approved plans.
 const PLAN_KEY = (id: string) => `plan:${id}`;
 
 export const planningService = {
   async generatePlan(input: PlanDraftInput): Promise<LevelingPlan> {
-    const plan = mockAnalyzeAndPlan({
-      tenant_id: DEMO_TENANT_ID,
+    const plan = await apiClient.post<LevelingPlan>("/api/v1/plans/generate", {
       teacher_id: input.teacher_id,
       student_id: input.student_id,
       topic_ids: input.topic_ids,
-      exam_file_names: input.exams.map((e) => e.file_name),
+      exams: input.exams.map((e) => ({
+        student_id: e.student_id,
+        file_name: e.file_name,
+        file_content_base64: e.file_content_base64,
+      })),
     });
     writeJSON(PLAN_KEY(plan.plan_id), plan);
     return plan;
